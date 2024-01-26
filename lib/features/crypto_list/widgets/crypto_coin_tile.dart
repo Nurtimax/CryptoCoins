@@ -1,4 +1,4 @@
-import 'package:Nurtimax/repositories/crypto_coins/modules/crypto_coin.dart';
+import 'package:nurtimax/repositories/crypto_coins/modules/crypto_coin.dart';
 import 'package:flutter/material.dart';
 
 class CryptoCoinTile extends StatelessWidget {

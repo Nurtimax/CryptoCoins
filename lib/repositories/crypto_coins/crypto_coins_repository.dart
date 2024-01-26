@@ -1,5 +1,6 @@
-import 'package:Nurtimax/repositories/crypto_coins/crypto_coins.dart';
+import 'package:nurtimax/repositories/crypto_coins/crypto_coins.dart';
 import 'package:dio/dio.dart';
+import 'package:nurtimax/repositories/crypto_coins/modules/crypto_coin_detail.dart';
 
 class CryptoCoinsRepository implements AbstractCoinsRepository {
   CryptoCoinsRepository({
@@ -29,5 +30,17 @@ class CryptoCoinsRepository implements AbstractCoinsRepository {
     }).toList();
 
     return cryptoCoinList;
+  }
+
+  @override
+  Future<CryptoCoinDetail> getCoinDetails(String currencyCode) async {
+    final response = await dio.get(
+        'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=$currencyCode&tsyms=USD');
+
+    final data = response.data as Map<String, dynamic>;
+    final dataRaw = data['RAW'] as Map<String, dynamic>;
+    final coinData = dataRaw[currencyCode] as Map<String, dynamic>;
+    final usdData = coinData['USD'] as Map<String, dynamic>;
+    return usdData as CryptoCoinDetail;
   }
 }
