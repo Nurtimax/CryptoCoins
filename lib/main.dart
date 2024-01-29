@@ -23,6 +23,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  talker.info(app.options.projectId);
+
   final dio = Dio();
 
   dio.interceptors.add(
